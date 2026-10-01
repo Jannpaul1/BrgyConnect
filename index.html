@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Barangay Connect - a front-end barangay service management system">
+  <title>APPSDEV - Barangay Connect</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container nav-container">
+    <a href="#home" class="logo"><span>Brgy</span>Connect</a>
+    <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#features" class="nav-link">Features</a>
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#dashboard" class="nav-link">Dashboard</a>
+      <a href="#records" class="nav-link admin-link">Records</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <span id="sessionBadge" class="session-badge"></span>
+      <button id="adminBtn" class="btn btn-small btn-outline">Admin</button>
+      <button id="residentBtn" class="btn btn-small btn-primary">Resident</button>
+      <button id="profileBtn" class="btn btn-small btn-outline hidden">Profile</button>
+      <button id="logoutBtn" class="btn btn-small btn-danger hidden">Admin Logout</button>
+      <button id="residentLogoutBtn" class="btn btn-small btn-danger hidden">Logout</button>
+    </div>
+    <button id="hamburger" class="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <!-- HOME -->
+  <section id="home" class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <span class="eyebrow">DIGITAL BARANGAY SERVICES</span>
+        <h1>Barangay services</h1>
+        <p class="lead">Book appointments, submit service requests, view your information, and stay connected with your barangay in one organized platform.</p>
+        <div class="hero-ctas">
+          <button class="btn btn-primary btn-lg" data-action="book">Book an Appointment</button>
+          <a href="#services" class="btn btn-outline btn-lg">Explore Services</a>
+        </div>
+        <div class="hero-highlights">
+          <div><strong>01</strong><span>Easy Booking</span></div>
+          <div><strong>02</strong><span>Service Requests</span></div>
+          <div><strong>03</strong><span>Resident Records</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="dashboard-preview">
+          <div class="preview-head">
+            <div><small>BARANGAY CONNECT</small><strong>Dashboard</strong></div>
+            <span class="live-dot">● Live</span>
+          </div>
+          <div class="preview-stats">
+            <div><span>Residents</span><strong id="heroResidents">0</strong></div>
+            <div><span>Appointments</span><strong id="heroAppointments">0</strong></div>
+            <div><span>Requests</span><strong id="heroRequests">0</strong></div>
+          </div>
+          <div class="mini-chart">
+            <div class="chart-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="chart-label"><span>Service activity</span><b>This month</b></div>
+          </div>
+          <div class="preview-list">
+            <div><span class="status-dot pending"></span>Appointment booking <b>Active</b></div>
+            <div><span class="status-dot done"></span>Resident support <b>Ready</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="eyebrow">ABOUT THE PROJECT</span>
+        <h2>One place for everyday barangay needs.</h2>
+        <p class="muted">Barangay Connect is designed to make barangay services easier to access, more organized, and more convenient for residents.</p>
+      </div>
+      <div class="cards-grid three">
+        <article class="info-card"><div class="card-icon">🎯</div><h3>Purpose</h3><p>Give residents a faster and more convenient way to access services, request assistance, and manage appointments.</p></article>
+        <article class="info-card"><div class="card-icon">🚀</div><h3>Objectives</h3><ul><li>Improve appointment scheduling</li><li>Organize resident information</li><li>Make requests easier to track</li></ul></article>
+        <article class="info-card"><div class="card-icon">💡</div><h3>Problem & Solution</h3><p>Instead of relying only on manual processes, the system brings appointments, requests, records, and updates together in one interface.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="section section-soft">
+    <div class="container">
+      <div class="section-heading">
+        <span class="eyebrow">KEY FEATURES</span>
+        <h2>Everything connected in one system.</h2>
+      </div>
+      <div class="features-grid">
+        <button class="feature-card" data-feature="appointment"><span class="feature-icon">📅</span><h3>Appointment Booking</h3><p>Choose a service, date, and available time slot.</p><span class="feature-link">Open feature →</span></button>
+        <button class="feature-card" data-feature="records"><span class="feature-icon">📋</span><h3>Resident Records</h3><p>Admin can search and view resident information.</p><span class="feature-link">Open feature →</span></button>
+        <button class="feature-card" data-feature="requests"><span class="feature-icon">📝</span><h3>Service Requests</h3><p>Submit and track community service requests.</p><span class="feature-link">Open feature →</span></button>
+        <button class="feature-card" data-feature="dashboard"><span class="feature-icon">📊</span><h3>Dashboard</h3><p>See activity, appointments, requests, and quick actions.</p><span class="feature-link">Open feature →</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="eyebrow">SERVICES</span>
+        <h2>What do you need today?</h2>
+        <p class="muted">Select a service below. Forms save data locally in this demo.</p>
+      </div>
+      <div class="service-tabs tabs">
+        <div class="tabs-nav" role="tablist">
+          <button class="tab-btn active" data-tab="service-book" role="tab">📅 Book</button>
+          <button class="tab-btn" data-tab="service-request" role="tab">📝 Request</button>
+          <button class="tab-btn" data-tab="service-status" role="tab">🔎 Track</button>
+          <button class="tab-btn" data-tab="service-info" role="tab">ℹ️ Information</button>
+        </div>
+
+        <div class="tab-panel active" id="service-book">
+          <div class="service-panel">
+            <div><span class="panel-icon">📅</span><h3>Book an Appointment</h3><p>Reserve a barangay service slot without waiting in line to schedule.</p></div>
+            <button class="btn btn-primary" data-action="book">Start Booking</button>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="service-request">
+          <form id="requestForm" class="form-grid">
+            <div><label for="requestType">Request Type</label><select id="requestType" required><option value="">Select a request</option><option>Barangay Clearance</option><option>Certificate of Residency</option><option>Certificate of Indigency</option><option>Community Assistance</option><option>Other Concern</option></select></div>
+            <div><label for="requestSubject">Subject</label><input id="requestSubject" required placeholder="Short description"></div>
+            <div class="full"><label for="requestDetails">Details</label><textarea id="requestDetails" rows="4" required placeholder="Explain what you need..."></textarea></div>
+            <div><label for="requestContact">Contact Email</label><input id="requestContact" type="email" required></div>
+            <div><label for="requestPriority">Priority</label><select id="requestPriority"><option>Normal</option><option>Urgent</option></select></div>
+            <div class="full form-actions"><button class="btn btn-primary" type="submit">Submit Request</button><span id="requestMessage" class="form-message"></span></div>
+          </form>
+        </div>
+
+        <div class="tab-panel" id="service-status">
+          <div class="status-search">
+            <div><label for="requestSearch">Search Request ID</label><input id="requestSearch" placeholder="Example: REQ-1001"></div>
+            <button id="searchRequestBtn" class="btn btn-primary">Check Status</button>
+          </div>
+          <div id="requestStatusResult" class="empty-state">Enter a request ID to see its status.</div>
+        </div>
+
+        <div class="tab-panel" id="service-info">
+          <div class="info-list">
+            <div><strong>Office Hours</strong><span>Monday–Friday, 8:00 AM–5:00 PM</span></div>
+            <div><strong>Appointment Services</strong><span>Documents, clearances, consultations, assistance</span></div>
+            <div><strong>What to bring</strong><span>Valid ID and documents related to your request</span></div>
+            <div><strong>System note</strong><span>This school-project prototype uses browser LocalStorage; it is not a live government database.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DASHBOARD -->
+  <section id="dashboard" class="section section-soft">
+    <div class="container">
+      <div class="section-heading dashboard-heading">
+        <div><span class="eyebrow">DASHBOARD</span><h2 id="dashboardTitle">Your Barangay Connect dashboard</h2></div>
+        <span id="dashboardRole" class="role-pill">Guest</span>
+      </div>
+
+      <div id="guestDashboard" class="dashboard-guest">
+        <div class="empty-state large"><span>👋</span><h3>Welcome to Barangay Connect</h3><p>Sign in as a Resident to see your appointments and requests, or use Admin to manage the system.</p><div><button class="btn btn-primary" id="guestResidentBtn">Resident Login</button><button class="btn btn-outline" id="guestAdminBtn">Admin Login</button></div></div>
+      </div>
+
+      <div id="residentDashboard" class="hidden">
+        <div class="stats-grid">
+          <div class="stat-card"><span>My Appointments</span><strong id="myAppointmentCount">0</strong><small>booked</small></div>
+          <div class="stat-card"><span>My Requests</span><strong id="myRequestCount">0</strong><small>submitted</small></div>
+          <div class="stat-card"><span>Account</span><strong>Active</strong><small id="residentDashName">Resident</small></div>
+        </div>
+        <div class="dashboard-grid">
+          <div class="data-card"><div class="data-card-head"><h3>My Appointments</h3><button class="text-btn" data-action="book">+ New</button></div><div id="residentAppointmentsList"></div></div>
+          <div class="data-card"><div class="data-card-head"><h3>My Requests</h3><button class="text-btn" data-action="request">+ Request</button></div><div id="residentRequestsList"></div></div>
+        </div>
+      </div>
+
+      <div id="adminDashboard" class="hidden">
+        <div class="stats-grid">
+          <div class="stat-card"><span>Total Residents</span><strong id="adminResidentsCount">0</strong><small>registered</small></div>
+          <div class="stat-card"><span>Appointments</span><strong id="adminAppointmentsCount">0</strong><small>all bookings</small></div>
+          <div class="stat-card"><span>Pending Requests</span><strong id="adminRequestsCount">0</strong><small>needs attention</small></div>
+          <div class="stat-card"><span>Messages</span><strong id="adminMessagesCount">0</strong><small>contact messages</small></div>
+        </div>
+        <div class="dashboard-grid">
+          <div class="data-card"><div class="data-card-head"><h3>Recent Appointments</h3><a href="#records" class="text-btn">Records →</a></div><div id="adminAppointmentsList"></div></div>
+          <div class="data-card"><div class="data-card-head"><h3>Recent Requests</h3><button class="text-btn" id="openAdminRequests">View all</button></div><div id="adminRequestsList"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECORDS -->
+  <section id="records" class="section admin-only">
+    <div class="container">
+      <div class="section-heading"><span class="eyebrow">ADMIN ONLY</span><h2>Resident Records</h2><p class="muted">View complete resident information, appointment status, and appointment history in one place.</p></div>
+      <div class="toolbar card">
+        <input id="searchRecords" placeholder="Search name, ID, email, barangay, purok, or address">
+        <button class="btn btn-primary" id="addRecordBtn">+ Add Resident</button>
+      </div>
+      <div class="table-wrap card">
+        <table class="records-table" id="recordsTable">
+          <thead><tr><th>ID</th><th>RESIDENT</th><th>AGE</th><th>APPOINTMENTS</th><th>ACTIONS</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <div id="recordsEmpty" class="empty-state hidden">No resident records found.</div>
+      </div>
+
+      <div class="records-appointments-head">
+        <div><span class="eyebrow">APPOINTMENT QUEUE</span><h3>Review and manage appointments</h3><p class="muted">Approve bookings, reject requests, or update their current status.</p></div>
+        <select id="appointmentStatusFilter" aria-label="Filter appointments by status">
+          <option value="All">All statuses</option><option value="Pending">Pending</option><option value="Approved">Approved</option><option value="Rejected">Rejected</option><option value="Completed">Completed</option><option value="Cancelled">Cancelled</option>
+        </select>
+      </div>
+      <div class="table-wrap card">
+        <table class="records-table appointment-table" id="adminAppointmentsTable">
+          <thead><tr><th>RESIDENT</th><th>SERVICE</th><th>DATE & TIME</th><th>STATUS</th><th>ACTIONS</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <div id="appointmentsEmpty" class="empty-state hidden">No appointments match this filter.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADMIN DATA -->
+  <section id="adminPanel" class="section admin-only">
+    <div class="container">
+      <div class="section-heading"><span class="eyebrow">SYSTEM TOOLS</span><h2>Admin Tools</h2></div>
+      <div class="admin-tool-grid">
+        <button class="tool-card" id="exportData"><span>⬇️</span><strong>Export Data</strong><small>Download local demo data as JSON</small></button>
+        <button class="tool-card" id="importData"><span>⬆️</span><strong>Import Data</strong><small>Restore a previously exported JSON file</small></button>
+        <button class="tool-card danger-card" id="clearData"><span>🗑️</span><strong>Clear Demo Data</strong><small>Remove appointments, requests, records, and messages</small></button>
+        <input id="importFile" type="file" accept="application/json" hidden>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="section-heading"><span class="eyebrow">CONTACT</span><h2>Get in touch.</h2></div>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="contact-card"><span>📧</span><div><strong>Email</strong><p>barangayconnect@example.com</p></div></div>
+          <div class="contact-card"><span>📞</span><div><strong>Phone</strong><p>+63 912 345 6789</p></div></div>
+          <div class="contact-card"><span>🕐</span><div><strong>Office Hours</strong><p>Monday–Friday, 8:00 AM–5:00 PM</p></div></div>
+          <div class="contact-card"><span>📍</span><div><strong>Barangay Office</strong><p>Municipal/Barangay Hall</p></div></div>
+        </div>
+        <form id="contactForm" class="card contact-form">
+          <label for="cname">Name</label><input id="cname" required>
+          <label for="cemail">Email</label><input id="cemail" type="email" required>
+          <label for="cmessage">Message</label><textarea id="cmessage" rows="5" required></textarea>
+          <button class="btn btn-primary" type="submit">Send Message</button>
+          <div id="contactMessage" class="form-message"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div><strong>BrgyConnect</strong> — APPSDEV Project</div>
+    <div>© <span id="year"></span> Barangay Connect</div>
+  </div>
+</footer>
+
+<!-- Appointment Modal -->
+<div id="appointmentModal" class="modal" aria-hidden="true">
+  <div class="modal-dialog wide">
+    <button class="modal-close" data-close="appointmentModal">✕</button>
+    <div class="modal-heading"><span class="modal-icon">📅</span><div><span class="eyebrow">APPOINTMENT</span><h2>Book an Appointment</h2></div></div>
+    <form id="appointmentForm">
+      <div class="form-grid">
+        <div><label for="serviceType">Service</label><select id="serviceType" required><option value="">Choose a service</option><option>Documents / Clearance</option><option>Consultation</option><option>Request Assistance</option><option>Certificate Request</option></select></div>
+        <div><label for="appointmentEmail">Email</label><input id="appointmentEmail" type="email" required></div>
+        <div><label for="appointmentDate">Date</label><input id="appointmentDate" type="date" required></div>
+        <div><label for="appointmentTime">Time</label><select id="appointmentTime" required><option value="">Choose a date first</option></select></div>
+        <div class="full"><label for="appointmentNotes">Notes (optional)</label><textarea id="appointmentNotes" rows="3" placeholder="Additional information..."></textarea></div>
+      </div>
+      <div id="appointmentMessage" class="form-message"></div>
+      <div class="form-actions right"><button type="button" class="btn btn-outline" data-close="appointmentModal">Cancel</button><button class="btn btn-primary" type="submit">Confirm Appointment</button></div>
+    </form>
+  </div>
+</div>
+
+<!-- Admin Modal -->
+<div id="adminModal" class="modal" aria-hidden="true">
+  <div class="modal-card">
+    <button type="button" class="modal-close" id="closeAdmin">×</button>
+
+    <div class="eyebrow">🔐 ADMIN ACCESS</div>
+    <h2>Admin Sign In</h2>
+    <p>Authorized administrators only.</p>
+
+    <form id="adminLoginForm" class="form" autocomplete="off">
+
+      <label for="adminUser">Username</label>
+      <input
+        id="adminUser"
+        name="adminUser"
+        type="text"
+        placeholder="Enter username"
+        autocomplete="off"
+        required
+      >
+
+      <label for="adminPass">Password</label>
+      <input
+        id="adminPass"
+        name="adminPass"
+        type="password"
+        placeholder="Enter password"
+        autocomplete="new-password"
+        required
+      >
+
+      <div class="form-actions">
+        <button type="submit" class="btn primary">
+          Sign In
+        </button>
+
+        <button type="button" class="btn ghost" id="cancelAdmin">
+          Cancel
+        </button>
+      </div>
+
+      <div
+        id="adminMessage"
+        class="form-message"
+        role="status"
+        aria-live="polite">
+      </div>
+
+    </form>
+  </div>
+</div>
+<!-- Resident Modal -->
+<div id="residentModal" class="modal" aria-hidden="true">
+  <div class="modal-dialog">
+    <button class="modal-close" data-close="residentModal">✕</button>
+    <div class="modal-heading"><span class="modal-icon">👤</span><div><span class="eyebrow">RESIDENT PORTAL</span><h2>Resident Account</h2></div></div>
+    <div class="tabs compact">
+      <div class="tabs-nav">
+        <button class="tab-btn active" data-tab="residentSignin">Sign In</button>
+        <button class="tab-btn" data-tab="residentSignup">Create Account</button>
+      </div>
+      <div class="tab-panel active" id="residentSignin">
+        <form id="residentLoginForm">
+          <label for="resUser">Username</label><input id="resUser" required>
+          <label for="resPass">Password</label><input id="resPass" type="password" required>
+          <div id="residentMessage" class="form-message"></div>
+          <div class="form-actions right"><button type="button" class="btn btn-outline" data-close="residentModal">Cancel</button><button class="btn btn-primary">Sign In</button></div>
+        </form>
+      </div>
+      <div class="tab-panel" id="residentSignup">
+        <form id="residentSignupForm">
+          <div class="form-grid">
+            <div><label for="ruser">Username</label><input id="ruser" required></div>
+            <div><label for="remail">Email</label><input id="remail" type="email" required></div>
+            <div><label for="rbarangay">Barangay</label><input id="rbarangay" required></div>
+            <div><label for="rpurok">Purok</label><input id="rpurok" required></div>
+            <div><label for="rage">Age</label><input id="rage" type="number" min="0" max="120" required></div>
+            <div><label for="rpass">Password</label><input id="rpass" type="password" minlength="6" required></div>
+            <div><label for="rpass2">Confirm Password</label><input id="rpass2" type="password" minlength="6" required></div>
+          </div>
+          <div id="residentSignupMessage" class="form-message"></div>
+          <div class="form-actions right"><button class="btn btn-primary">Create Account</button></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Profile Modal -->
+<div id="profileModal" class="modal" aria-hidden="true">
+  <div class="modal-dialog">
+    <button class="modal-close" data-close="profileModal">✕</button>
+    <div class="profile-head"><div id="profileAvatar" class="avatar">👤</div><div><span class="eyebrow">MY PROFILE</span><h2 id="profileName">Resident</h2><p id="profileEmail" class="muted"></p></div></div>
+    <div class="profile-details">
+      <div><span>Barangay</span><strong id="profileBarangay">—</strong></div>
+      <div><span>Purok</span><strong id="profilePurok">—</strong></div>
+      <div><span>Username</span><strong id="profileUsername">—</strong></div>
+    </div>
+    <label class="upload-btn">Change Profile Picture<input id="profilePicInput" type="file" accept="image/*" hidden></label>
+  </div>
+</div>
+
+<!-- Record Modal -->
+<div id="recordModal" class="modal" aria-hidden="true">
+  <div class="modal-dialog">
+    <button class="modal-close" data-close="recordModal">✕</button>
+    <div class="modal-heading"><span class="modal-icon">📋</span><div><span class="eyebrow">RESIDENT RECORD</span><h2>Record Details</h2></div></div>
+    <div id="recordInfo"></div>
+    <div class="data-card inner-card"><div class="data-card-head"><h3>Appointment history</h3><span id="recordAppointmentCount" class="pill">0</span></div><div id="recordAppointments"></div></div>
+    <div class="form-actions right"><button id="editRecordBtn" class="btn btn-primary">Edit Record</button><button class="btn btn-outline" data-close="recordModal">Close</button></div>
+  </div>
+</div>
+
+<!-- Record Edit Modal -->
+<div id="recordEditModal" class="modal" aria-hidden="true">
+  <div class="modal-dialog">
+    <button class="modal-close" data-close="recordEditModal">✕</button>
+    <div class="modal-heading"><span class="modal-icon">✏️</span><div><span class="eyebrow">RECORDS</span><h2 id="recordEditTitle">Add Resident</h2></div></div>
+    <form id="recordForm">
+      <input id="recordId" type="hidden">
+      <label for="recordName">Full Name</label><input id="recordName" required>
+      <div class="form-grid">
+        <div><label for="recordAge">Age</label><input id="recordAge" type="number" min="0" max="120" required></div>
+        <div><label for="recordAddress">Address</label><input id="recordAddress" required></div>
+      </div>
+      <div id="recordFormMessage" class="form-message"></div>
+      <div class="form-actions right"><button type="button" class="btn btn-outline" data-close="recordEditModal">Cancel</button><button class="btn btn-primary">Save Record</button></div>
+    </form>
+  </div>
+</div>
+
+<div id="toast" class="toast" role="status"></div>
+<script src="script.js"></script>
+</body>
+</html>
