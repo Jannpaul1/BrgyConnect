@@ -25,6 +25,10 @@
     </nav>
     <div class="header-actions">
       <span id="sessionBadge" class="session-badge"></span>
+      <button id="adminMessagesNavBtn" class="icon-btn notification-bell hidden" type="button" aria-label="Messages">
+        💬
+        <span id="messageBadge" class="notification-count hidden">0</span>
+      </button>
       <button id="adminBtn" class="btn btn-small btn-outline">Admin</button>
       <button id="residentBtn" class="btn btn-small btn-primary">Resident</button>
       <button id="profileBtn" class="btn btn-small btn-outline hidden">Profile</button>
@@ -194,11 +198,15 @@
           <div class="stat-card"><span>Total Residents</span><strong id="adminResidentsCount">0</strong><small>registered</small></div>
           <div class="stat-card"><span>Appointments</span><strong id="adminAppointmentsCount">0</strong><small>all bookings</small></div>
           <div class="stat-card"><span>Pending Requests</span><strong id="adminRequestsCount">0</strong><small>needs attention</small></div>
-          <div class="stat-card"><span>Messages</span><strong id="adminMessagesCount">0</strong><small>contact messages</small></div>
+          <div class="stat-card"><span>Messages</span><strong id="adminMessagesCount">0</strong><small id="adminMessagesMeta">0 unread messages</small><div class="compact-action-row"><button class="text-btn" id="openAdminMessages">View Messages</button></div></div>
         </div>
         <div class="dashboard-grid">
           <div class="data-card"><div class="data-card-head"><h3>Recent Appointments</h3><a href="#records" class="text-btn">Records →</a></div><div id="adminAppointmentsList"></div></div>
           <div class="data-card"><div class="data-card-head"><h3>Recent Requests</h3><button class="text-btn" id="openAdminRequests">View all</button></div><div id="adminRequestsList"></div></div>
+        </div>
+        <div class="data-card recent-messages-card">
+          <div class="data-card-head"><h3>Recent Messages</h3><button class="text-btn" id="openAdminMessagesFromRecent">View all</button></div>
+          <div id="recentMessagesList" class="recent-message-list"></div>
         </div>
       </div>
     </div>
@@ -255,22 +263,156 @@
       <div class="section-heading"><span class="eyebrow">CONTACT</span><h2>Get in touch.</h2></div>
       <div class="contact-grid">
         <div class="contact-info">
-          <div class="contact-card"><span>📧</span><div><strong>Email</strong><p>barangayconnect@example.com</p></div></div>
-          <div class="contact-card"><span>📞</span><div><strong>Phone</strong><p>+63 912 345 6789</p></div></div>
-          <div class="contact-card"><span>🕐</span><div><strong>Office Hours</strong><p>Monday–Friday, 8:00 AM–5:00 PM</p></div></div>
-          <div class="contact-card"><span>📍</span><div><strong>Barangay Office</strong><p>Municipal/Barangay Hall</p></div></div>
+          <div class="contact-card">
+            <span>📧</span>
+            <div>
+              <strong>Email</strong>
+              <p><a href="mailto:barangayconnect@example.com">barangayconnect@example.com</a></p>
+            </div>
+          </div>
+          <div class="contact-card">
+            <span>📞</span>
+            <div>
+              <strong>Phone</strong>
+              <p><a href="tel:+639123456789">+63 912 345 6789</a></p>
+            </div>
+          </div>
+          <div class="contact-card">
+            <span>🕐</span>
+            <div>
+              <strong>Office Hours</strong>
+              <p>Monday–Friday, 8:00 AM–5:00 PM</p>
+            </div>
+          </div>
+          <div class="contact-card">
+            <span>📍</span>
+            <div>
+              <strong>Barangay Office</strong>
+              <p>Municipal/Barangay Hall</p>
+            </div>
+          </div>
         </div>
-        <form id="contactForm" class="card contact-form">
-          <label for="cname">Name</label><input id="cname" required>
-          <label for="cemail">Email</label><input id="cemail" type="email" required>
-          <label for="cmessage">Message</label><textarea id="cmessage" rows="5" required></textarea>
-          <button class="btn btn-primary" type="submit">Send Message</button>
-          <div id="contactMessage" class="form-message"></div>
+        <form id="contactForm" class="card contact-form" novalidate>
+          <div class="form-grid single-column">
+            <div>
+              <label for="cname">Full Name</label>
+              <input id="cname" name="cname" type="text" placeholder="Juan Dela Cruz">
+              <div id="cnameError" class="field-error" aria-live="polite"></div>
+            </div>
+            <div>
+              <label for="cemail">Email</label>
+              <input id="cemail" name="cemail" type="email" placeholder="juan@example.com">
+              <div id="cemailError" class="field-error" aria-live="polite"></div>
+            </div>
+            <div>
+              <label for="ccontact">Contact Number</label>
+              <input id="ccontact" name="ccontact" type="tel" placeholder="09123456789">
+              <div id="ccontactError" class="field-error" aria-live="polite"></div>
+            </div>
+            <div>
+              <label for="csubject">Subject</label>
+              <select id="csubject" name="csubject" required>
+                <option value="">Select a subject</option>
+                <option value="General Inquiry">General Inquiry</option>
+                <option value="Barangay Clearance">Barangay Clearance</option>
+                <option value="Certificate of Indigency">Certificate of Indigency</option>
+                <option value="Certificate of Residency">Certificate of Residency</option>
+                <option value="Business Clearance">Business Clearance</option>
+                <option value="Barangay ID">Barangay ID</option>
+                <option value="Health Services">Health Services</option>
+                <option value="Appointment Inquiry">Appointment Inquiry</option>
+                <option value="Document Requirements">Document Requirements</option>
+                <option value="Assistance Request">Assistance Request</option>
+                <option value="Complaint / Concern">Complaint / Concern</option>
+                <option value="Community Events">Community Events</option>
+                <option value="Emergency / Urgent Concern">Emergency / Urgent Concern</option>
+                <option value="Other">Other</option>
+              </select>
+              <div id="csubjectError" class="field-error" aria-live="polite"></div>
+              <div id="csubjectOtherWrap" class="subject-other-wrap hidden">
+                <label for="csubjectOther">Please specify your subject</label>
+                <input id="csubjectOther" name="csubjectOther" type="text" placeholder="Please specify your subject">
+                <div id="csubjectOtherError" class="field-error" aria-live="polite"></div>
+              </div>
+            </div>
+            <div class="full">
+              <label for="cmessage">Message</label>
+              <textarea id="cmessage" name="cmessage" rows="5" placeholder="Write your message here..."></textarea>
+              <div id="cmessageError" class="field-error" aria-live="polite"></div>
+            </div>
+          </div>
+          <div class="form-actions right">
+            <button id="contactSubmitBtn" class="btn btn-primary" type="submit">Send Message</button>
+          </div>
+          <div id="contactMessage" class="form-message" aria-live="polite"></div>
         </form>
       </div>
     </div>
   </section>
 </main>
+
+<section id="adminMessages" class="section admin-only">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">ADMIN MESSAGES</span>
+      <h2>Messages Center</h2>
+      <p class="muted">Monitor resident inquiries, read message details, reply, and manage inbox activity.</p>
+    </div>
+
+    <div class="message-center-shell">
+      <div class="message-inbox-panel">
+        <div class="message-toolbar">
+          <input id="messageSearchInput" type="search" placeholder="Search by name, email, subject, or message ID">
+          <div id="messageFilters" class="message-filter-row">
+            <button class="message-filter active" type="button" data-message-filter="All">All</button>
+            <button class="message-filter" type="button" data-message-filter="Unread">Unread</button>
+            <button class="message-filter" type="button" data-message-filter="Read">Read</button>
+            <button class="message-filter" type="button" data-message-filter="High Priority">High Priority</button>
+            <button class="message-filter" type="button" data-message-filter="Urgent">Urgent</button>
+          </div>
+          <div class="message-toolbar-row">
+            <select id="messageSubjectFilter" aria-label="Filter messages by subject">
+              <option value="All">All subjects</option>
+              <option value="General Inquiry">General Inquiry</option>
+              <option value="Barangay Clearance">Barangay Clearance</option>
+              <option value="Certificate of Indigency">Certificate of Indigency</option>
+              <option value="Certificate of Residency">Certificate of Residency</option>
+              <option value="Business Clearance">Business Clearance</option>
+              <option value="Barangay ID">Barangay ID</option>
+              <option value="Health Services">Health Services</option>
+              <option value="Appointment Inquiry">Appointment Inquiry</option>
+              <option value="Document Requirements">Document Requirements</option>
+              <option value="Assistance Request">Assistance Request</option>
+              <option value="Complaint / Concern">Complaint / Concern</option>
+              <option value="Community Events">Community Events</option>
+              <option value="Emergency / Urgent Concern">Emergency / Urgent Concern</option>
+              <option value="Other">Other</option>
+            </select>
+            <select id="messageSort" aria-label="Sort messages">
+              <option value="newest">Newest first</option>
+              <option value="oldest">Oldest first</option>
+              <option value="unread">Unread first</option>
+              <option value="priority">Priority</option>
+            </select>
+          </div>
+        </div>
+        <div class="bulk-selection-row">
+          <span id="bulkSelectionInfo" class="bulk-selection-hint">No messages selected</span>
+          <div class="bulk-message-actions">
+            <button class="btn btn-small btn-outline" type="button" data-bulk-action="read">Mark as Read</button>
+            <button class="btn btn-small btn-outline" type="button" data-bulk-action="unread">Mark as Unread</button>
+            <button class="btn btn-small btn-danger" type="button" data-bulk-action="delete">Delete</button>
+          </div>
+        </div>
+        <div id="messageList" class="message-list"></div>
+      </div>
+
+      <div id="messageDetailPane" class="message-detail-pane">
+        <div class="empty-state"><span>📩</span><h3>No message selected</h3><p>Choose a message from the inbox to view details.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <footer class="site-footer">
   <div class="container footer-grid">
@@ -426,6 +568,25 @@
       <div id="recordFormMessage" class="form-message"></div>
       <div class="form-actions right"><button type="button" class="btn btn-outline" data-close="recordEditModal">Cancel</button><button class="btn btn-primary">Save Record</button></div>
     </form>
+  </div>
+</div>
+
+<div id="requestDetailModal" class="modal" aria-hidden="true">
+  <div class="modal-dialog wide">
+    <button class="modal-close" data-close="requestDetailModal">✕</button>
+    <div class="modal-heading"><span class="modal-icon">📝</span><div><span class="eyebrow">REQUEST DETAILS</span><h2>Service Request</h2></div></div>
+    <div id="requestDetailContent" class="request-detail-content"></div>
+  </div>
+</div>
+
+<div id="requestsOverviewModal" class="modal" aria-hidden="true">
+  <div class="modal-dialog wide">
+    <button class="modal-close" data-close="requestsOverviewModal">✕</button>
+    <div class="modal-heading"><span class="modal-icon">📋</span><div><span class="eyebrow">REQUESTS</span><h2>All Requests</h2></div></div>
+    <div class="request-overview-toolbar">
+      <div id="requestsOverviewFilters" class="request-status-filters"></div>
+    </div>
+    <div id="requestsOverviewList" class="request-overview-list"></div>
   </div>
 </div>
 
